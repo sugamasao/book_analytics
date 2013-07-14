@@ -1,3 +1,5 @@
 require './app'
 
-run Application
+
+app = ->(call) { [200, {}, ["hi"]]}
+run app
