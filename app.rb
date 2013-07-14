@@ -20,7 +20,12 @@ class Application < Sinatra::Base
   get '/' do
     @rank = Rank.order('update_date DESC').load
     @book = Book.last
+    redirect '/how_to_start_up'
     slim :index
+  end
+
+  get '/how_to_start_up' do
+    'access to /update'
   end
 
   get '/update' do
