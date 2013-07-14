@@ -23,7 +23,7 @@ class Application < Sinatra::Base
   get '/' do
     @rank = Rank.order('update_date DESC').load
     @book = Book.last
-    @max_rank = Rank.order('update_date DESC').find_by(number: Rank.maximum(:number))
+    @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
     redirect '/how_to_start_up' if @book.nil?
     slim :index
   end
