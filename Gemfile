@@ -1,19 +1,21 @@
 source 'http://rubygems.org'
 
-gem 'rake'
-gem 'nokogiri'
+gem 'rack'
 
-gem 'sinatra'
-gem 'slim'
-gem 'activerecord'
-gem 'thin'
+#gem 'rake'
+#gem 'nokogiri'
 
-group :development do
-  gem 'sqlite3'
-  gem 'pry'
-  gem 'yard'
-end
+#gem 'sinatra'
+#gem 'slim'
+#gem 'activerecord'
+#gem 'thin'
 
-group :production do
-  gem 'pg'
-end
+#group :development do
+#  gem 'sqlite3'
+#  gem 'pry'
+#  gem 'yard'
+#end
+
+#group :production do
+#  gem 'pg'
+#end
