@@ -41,6 +41,11 @@ html
               th Publish Date
               td
                 = @book.publication_date
+            tr
+              th Max Rank
+              td
+                = @max_rank.number
+                = "(#{@max_rank.local_update_date})"
 
       .span8
         table.table.table-bordered.table-hover.table-striped

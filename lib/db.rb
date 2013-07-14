@@ -1,20 +1,26 @@
 require 'fileutils'
+require 'pathname'
 require 'active_record'
 
 module DB
 
-  # @param [path] Pathname sqlite3 database path
   # @return [ActiveRecord::ConnectionAdapters::SQLite3Adapter] connection object
-  def self.connect_database(path = nil)
+  def self.connect_database
     spec = if ENV['DATABASE_URL']
       ENV['DATABASE_URL'] + '?pool=15'
     else
-      FileUtils.mkdir_p(path.dirname)
-      {adapter: 'sqlite3', database: path.to_s}
+      {adapter: 'sqlite3', database: self.local_database_path}
     end
 
     ActiveRecord::Base.establish_connection(spec)
     ActiveRecord::Base.connection
   end
+
+  def self.local_database_path
+    path = Pathname.new(__dir__).parent.join('db', 'database.sqlite3')
+    FileUtils.mkdir_p(path.dirname)
+    path.to_s
+  end
+
 end
 

@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'slim'
-require 'active_record'
 
 require_relative 'lib/amazon_api'
 require_relative 'lib/db'
@@ -13,8 +12,7 @@ BOOK_ISBN     = '4774158798'
 
 class Application < Sinatra::Base
   configure do
-    path = Pathname.new(__dir__).join('db', 'database.sqlite3')
-    conn = DB.connect_database(path)
+    DB.connect_database
   end
 
   configure :development do
@@ -25,6 +23,7 @@ class Application < Sinatra::Base
   get '/' do
     @rank = Rank.order('update_date DESC').load
     @book = Book.last
+    @max_rank = Rank.order('update_date DESC').find_by(number: Rank.maximum(:number))
     redirect '/how_to_start_up' if @book.nil?
     slim :index
   end
