@@ -6,6 +6,7 @@ gem 'nokogiri'
 gem 'sinatra'
 gem 'slim'
 gem 'activerecord'
+gem 'thin'
 
 group :development do
   gem 'sqlite3'
