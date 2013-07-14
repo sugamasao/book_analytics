@@ -8,44 +8,50 @@ html
   body.container
     h1 パーフェクトRuby Analytics
 
-    table.table.table-bordered.table-hover
-      caption Book Info
-      thead
-        tr
-          th Title
-          th Author
-          th Publisher
-          th Amount
-          th Page
-          th Publish Date
-      tbody
-        tr
-          td
-            a href= @book.link
-              = @book.title
-          td
-            = @book.author
-          td
-            = @book.publisher
-          td
-            = @book.amount
-          td
-            = @book.page
-          td
-            = @book.publication_date
+    .row
+      .span4
+        table.table.table-bordered.table-hover
+          thead
+              th(rowspan="2") Book Info
+          tbody
+            tr
+              th Title
+              td
+                a href= @book.link
+                  = @book.title
+            tr
+              th Author
+              td
+                = @book.author
+            tr
+              th Publisher
+              td
+                = @book.publisher
+            tr
+              th Amount
+              td
+                = @book.amount
+            tr
+              th Page
+              td
+                = @book.page
+            tr
+              th Publish Date
+              td
+                = @book.publication_date
 
-    table.table.table-bordered.table-hover
-      caption Ranking
-      thead
-        tr
-          th Updated At
-          th Rank
-      tbody
-        - @rank.each do |r|
-          tr
-            td
-                = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
-            td
-                = r.number
+      .span8
+        table.table.table-bordered.table-hover
+          thead
+            tr
+              th Updated At
+              th Rank
+          tbody
+            - @rank.each do |r|
+              tr
+                td
+                    = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
+                td
+                    = r.number
 
 
