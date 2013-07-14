@@ -1,0 +1,18 @@
+source 'http://rubygems.org'
+
+gem 'rake'
+gem 'nokogiri'
+
+gem 'sinatra'
+gem 'slim'
+gem 'activerecord'
+
+group :development do
+  gem 'sqlite3'
+  gem 'pry'
+  gem 'yard'
+end
+
+group :production do
+  gem 'pg'
+end

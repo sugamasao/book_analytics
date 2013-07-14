@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    link rel='stylesheet' type='text/css' href='bootstrap/css/bootstrap.css'
+    link rel='stylesheet' type='text/css' href='css/flat-ui.css'
+    title パーフェクトRuby Analytics
+  body.container
+    h1 パーフェクトRuby Analytics
+
+    table.table.table-bordered.table-hover
+      caption Book Info
+      thead
+        tr
+          th Title
+          th Author
+          th Amount
+          th Page
+          th Publish Date
+      tbody
+        tr
+          td
+            = @book.title
+          td
+            = @book.author
+          td
+            = @book.amount
+          td
+            = @book.page
+          td
+            = @book.publication_date
+
+    table.table.table-bordered.table-hover
+      caption Ranking
+      thead
+        tr
+          th Updated At
+          th Rank
+      tbody
+        tr
+          td
+            - @rank.each do |r|
+              = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
+          td
+            - @rank.each do |r|
+              = r.number
+
+

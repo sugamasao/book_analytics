@@ -1,0 +1,67 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activemodel (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
+    activerecord (4.0.0)
+      activemodel (= 4.0.0)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.0)
+      arel (~> 4.0.0)
+    activerecord-deprecated_finders (1.0.3)
+    activesupport (4.0.0)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    arel (4.0.0)
+    atomic (1.1.10)
+    builder (3.1.4)
+    coderay (1.0.9)
+    i18n (0.6.4)
+    method_source (0.8.1)
+    mini_portile (0.5.1)
+    minitest (4.7.5)
+    multi_json (1.7.7)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    pg (0.15.1)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
+    rake (10.1.0)
+    sinatra (1.4.2)
+      rack (~> 1.5, >= 1.5.2)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    slim (2.0.0)
+      temple (~> 0.6.5)
+      tilt (~> 1.3, >= 1.3.3)
+    slop (3.4.5)
+    sqlite3 (1.3.7)
+    temple (0.6.5)
+    thread_safe (0.1.0)
+      atomic
+    tilt (1.4.1)
+    tzinfo (0.3.37)
+    yard (0.8.6.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activerecord
+  nokogiri
+  pg
+  pry
+  rake
+  sinatra
+  slim
+  sqlite3
+  yard
