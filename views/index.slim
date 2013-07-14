@@ -37,12 +37,11 @@ html
           th Updated At
           th Rank
       tbody
-        tr
-          td
-            - @rank.each do |r|
-              = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
-          td
-            - @rank.each do |r|
-              = r.number
+        - @rank.each do |r|
+          tr
+            td
+                = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
+            td
+                = r.number
 
 
