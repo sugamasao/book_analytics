@@ -18,9 +18,9 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    @rank = Rank.order('update_date DESC').load
+    @rank = []#Rank.order('update_date DESC').load
     @book = Book.last
-    redirect '/how_to_start_up' if @rank.empty?
+    redirect '/how_to_start_up' if @book.empty?
     slim :index
   end
 
