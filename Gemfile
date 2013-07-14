@@ -8,7 +8,7 @@ gem 'rack'
 #gem 'sinatra'
 #gem 'slim'
 #gem 'activerecord'
-#gem 'thin'
+gem 'thin'
 
 #group :development do
 #  gem 'sqlite3'
