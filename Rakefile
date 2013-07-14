@@ -41,7 +41,7 @@ namespace :db do
         t.column :label,  :string, null: false
         t.column :url,    :text
         t.column :width,  :integer
-        t.column :height, :interger
+        t.column :height, :integer
         t.column :image,  :binary
         t.timestamps
       end
