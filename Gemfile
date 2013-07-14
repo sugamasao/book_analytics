@@ -14,6 +14,7 @@ group :development do
   gem 'sqlite3'
   gem 'pry'
   gem 'yard'
+  gem 'sinatra-contrib'
 end
 
 group :production do

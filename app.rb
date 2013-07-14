@@ -17,6 +17,11 @@ class Application < Sinatra::Base
     conn = DB.connect_database(path)
   end
 
+  configure :development do
+    require 'sinatra/reloader'
+    register Sinatra::Reloader
+  end
+
   get '/' do
     @rank = Rank.order('update_date DESC').load
     @book = Book.last

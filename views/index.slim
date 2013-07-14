@@ -20,7 +20,8 @@ html
       tbody
         tr
           td
-            = @book.title
+            a href= @book.link
+              = @book.title
           td
             = @book.author
           td
