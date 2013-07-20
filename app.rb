@@ -1,3 +1,5 @@
+require 'logger'
+
 require 'sinatra/base'
 require 'slim'
 
@@ -13,6 +15,10 @@ BOOK_ISBN     = '4774158798'
 class Application < Sinatra::Base
   configure do
     DB.connect_database
+    @logger = Logger.new(STDOUT)
+    @logger.warn %Q(ENV['AMAZON_ACCESS_KEY'] is not set.) if ENV['AMAZON_ACCESS_KEY'].nil?
+    @logger.warn %Q(ENV['AMAZON_SECRET_KEY'] is not set.) if ENV['AMAZON_SECRET_KEY'].nil?
+    @logger.warn %Q(ENV['AMAZON_ASSOCIATE_TAG'] is not set.) if ENV['AMAZON_ASSOCIATE_TAG'].nil?
   end
 
   configure :development do
@@ -21,7 +27,7 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    @rank = Rank.order('update_date DESC').load
+    @rank = Rank.order('update_date DESC').limit(72*3)
     @book = Book.last
     @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
     redirect '/how_to_start_up' if @book.nil?
@@ -55,5 +61,11 @@ class Application < Sinatra::Base
       'not to do'
     end
   end
+
+
+  error do
+  end
+
+
 end
 
