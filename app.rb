@@ -85,9 +85,9 @@ class Application < Sinatra::Base
   get %r{/(\d{8})} do
     d     = params[:captures].first
     date  = "#{d[0..3]}-#{d[4..5]}-#{d[6..7]}"
-    query = {start_date: "#{date} 00:00:00", end_date: "#{date} 23:59:59"}
+    query = {start_date: "#{date} 00:00:00 +09:00", end_date: "#{date} 23:59:59 +09:00"}
 
-    @rank = Rank.order('update_date DESC').where('update_date >= :start_date and update_date <= :end_date', query).page(params[:page]).per(PAGE_COUNT)
+    @rank = Rank.order('update_date DESC').where('update_date >= :start_date AND update_date <= :end_date', query).page(params[:page]).per(PAGE_COUNT)
 
     @book = Book.last
     @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
