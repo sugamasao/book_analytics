@@ -8,7 +8,8 @@ html
     link rel='stylesheet' type='text/css' href='css/flat-ui.css'
     title パーフェクトRuby Analytics
   body.container
-    h1 パーフェクトRuby Analytics
+    h1
+      a href = '/' パーフェクトRuby Analytics
 
     .row
       .span4
@@ -45,20 +46,24 @@ html
               th Max Rank
               td
                 = @max_rank.number
-                = "(#{@max_rank.local_update_date})"
+                = "(#{@max_rank.local_update_date.strftime('%Y-%m-%d')})"
 
       .span8
         table.table.table-bordered.table-hover.table-striped
           thead
             tr
-              th Updated At
+              th Update Time
               th Rank
           tbody
             - @rank.each do |r|
               tr
                 td
-                    = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
+                  = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
                 td
-                    = r.number
+                  = r.number
+        div
+          = paginate @rank
+
+
 
 

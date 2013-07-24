@@ -2,6 +2,7 @@ require 'time'
 require 'active_record'
 
 class Rank < ActiveRecord::Base
+
   def self.already_create?(date)
     self.find_by(update_date: date_format(date))
   end

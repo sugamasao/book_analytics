@@ -6,6 +6,8 @@ require 'time'
 require 'nokogiri'
 
 
+class AmazonAPIError < StandardError;end
+
 # @see http://aws.typepad.com/jp_mws/2012/12/amazon-mws-ruby-sample.html
 class AmazonAPI
   METHOD = 'GET'
@@ -29,6 +31,8 @@ class AmazonAPI
     params['Operation']      = 'ItemLookup'
     params['ItemId']         = isbn
     params['Timestamp']      = Time.now.utc.iso8601
+
+    raise AmazonAPIError.new('ENV is not set.') if @key.nil? || @secret.nil? || @associate_tag.nil?
 
     query_string = sort_params(params).join('&')
     query_string << '&Signature=' + create_signature(@secret, query_string)
