@@ -87,7 +87,7 @@ class Application < Sinatra::Base
     date  = "#{d[0..3]}-#{d[4..5]}-#{d[6..7]}"
     query = {start_date: "#{date} 00:00:00", end_date: "#{date} 23:59:59"}
 
-    @rank = Rank.order('update_date DESC').where('update_date >= :start_date and update_date <= :end_date', query).page
+    @rank = Rank.order('update_date DESC').where('update_date >= :start_date and update_date <= :end_date', query).page(params[:page]).per(PAGE_COUNT)
 
     @book = Book.last
     @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
