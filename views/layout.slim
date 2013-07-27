@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    link rel='stylesheet' type='text/css' href='bootstrap/css/bootstrap.css'
+    link rel='stylesheet' type='text/css' href='bootstrap/css/bootstrap-responsive.css'
+    link rel='stylesheet' type='text/css' href='css/flat-ui.css'
+    title パーフェクトRuby Analytics
+  body.container
+    h1
+      a href = '/' パーフェクトRuby Analytics
+
+    .row
+      .span4
+        table.table.table-bordered.table-hover
+          thead
+              th(rowspan="2") Book Info
+          tbody
+            tr
+              th Title
+              td
+                a href= @book.link
+                  = @book.title
+            tr
+              th Author
+              td
+                = @book.author
+            tr
+              th Publisher
+              td
+                = @book.publisher
+            tr
+              th Amount
+              td
+                = @book.amount
+            tr
+              th Page
+              td
+                = @book.page
+            tr
+              th Publish Date
+              td
+                = @book.publication_date
+            tr
+              th Max Rank
+              td
+                = @max_rank.number
+                | (
+                a href="/#{@max_rank.local_update_date.strftime('%Y%m%d')}"  #{@max_rank.local_update_date.strftime('%Y-%m-%d')}
+                | )
+
+      == yield

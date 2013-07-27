@@ -1,5 +1,6 @@
 require 'logger'
 require 'time'
+require 'date'
 
 require 'sinatra/base'
 require 'kaminari/sinatra'
@@ -30,12 +31,32 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  before do
+    @book     = Book.last
+    @max_rank = Rank.max_rank
+  end
+
   get '/' do
     @rank = Rank.order('update_date DESC').page(params[:page]).per(PAGE_COUNT)
-    @book = Book.last
-    @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
     redirect '/how_to_start_up' if @book.nil?
     slim :index
+  end
+
+  get %r{/(\d{4})(\d{2})(\d{2})} do
+    begin
+    @date = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
+    @rank = Rank.permalink(@date)
+    @next = Rank.permalink(@date + 1).count > 0
+    @prev = Rank.permalink(@date - 1).count > 0
+
+    redirect '/how_to_start_up' if @book.nil?
+    rescue => e
+      logger.error e.message
+      logger.error e.backtrace
+      error 404
+    end
+
+    slim :permalink
   end
 
   get '/how_to_start_up' do
@@ -50,7 +71,7 @@ class Application < Sinatra::Base
     logger.warn %Q(ENV['AMAZON_ASSOCIATE_TAG'] is not set.) if ENV['AMAZON_ASSOCIATE_TAG'].nil?
 
     begin
-      if Rank.already_create?(update_date).nil?
+      unless Rank.already_create?(update_date)
         res = AmazonAPI.new(ENV['AMAZON_ACCESS_KEY'], ENV['AMAZON_SECRET_KEY'], ENV['AMAZON_ASSOCIATE_TAG']).get_data(BOOK_ISBN)
 
         book        = res[:item]
@@ -68,10 +89,10 @@ class Application < Sinatra::Base
           end
         end
 
-        logger.info 'ok'
+        logger.info 'update ok'
         'ok'
       else
-        logger.info 'not to do'
+        logger.info 'update not to do'
         'not to do'
       end
 
@@ -81,23 +102,8 @@ class Application < Sinatra::Base
     end
   end
 
-
-  get %r{/(\d{8})} do
-    d     = params[:captures].first
-    date  = "#{d[0..3]}-#{d[4..5]}-#{d[6..7]}"
-    query = {start_date: Time.parse("#{date} 00:00:00"), end_date: Time.parse("#{date} 23:59:59")}
-
-    @rank = Rank.order('update_date DESC').where('update_date >= :start_date AND update_date <= :end_date', query).page(params[:page]).per(PAGE_COUNT)
-
-    @book = Book.last
-    @max_rank = Rank.order('update_date DESC').find_by(number: Rank.minimum(:number))
-    redirect '/how_to_start_up' if @book.nil?
-    slim :index
+  not_found do
+    slim :not_found
   end
-
-#  error do
-#  end
-
-
 end
 
