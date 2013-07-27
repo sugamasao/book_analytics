@@ -2,9 +2,8 @@ require 'logger'
 require 'time'
 require 'date'
 
-require 'sinatra/base'
-require 'kaminari/sinatra'
-require 'slim'
+require 'bundler'
+Bundler.require
 
 require_relative 'lib/amazon_api'
 require_relative 'lib/db'
@@ -27,7 +26,7 @@ class Application < Sinatra::Base
   end
 
   configure :development do
-    require 'sinatra/reloader'
+    Bundler.require(:development)
     register Sinatra::Reloader
   end
 
@@ -42,6 +41,7 @@ class Application < Sinatra::Base
     slim :index
   end
 
+  # /yyyy-mm-dd or /yyyymmdd
   get %r{/(\d{4})-?(\d{2})-?(\d{2})} do
     begin
       @date  = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)

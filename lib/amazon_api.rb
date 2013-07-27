@@ -5,7 +5,7 @@ require 'openssl'
 require 'time'
 require 'nokogiri'
 
-
+# AmazonAPIのエラークラス
 class AmazonAPIError < StandardError;end
 
 # @see http://aws.typepad.com/jp_mws/2012/12/amazon-mws-ruby-sample.html

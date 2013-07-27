@@ -6,14 +6,13 @@ gem 'rake'
 gem 'nokogiri'
 
 gem 'sinatra'
-gem 'kaminari'
+gem 'kaminari', require: 'kaminari/sinatra'
 gem 'padrino-helpers', '~> 0.11'
-gem 'tilt'
 gem 'slim'
 gem 'activerecord'
 gem 'unicorn'
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'yard'
