@@ -5,12 +5,14 @@
         th Update Time
         th Rank
     tbody
-      - @rank.each do |r|
+      - @rank.each_with_index do |r, index|
         tr
           td
             = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
           td
             = r.number
+            - if @rank[index+1] && r.number < @rank[index+1].number
+              span.fui-heart<
   div
     = paginate @rank
 
