@@ -1,0 +1,8 @@
+- ranks.each_with_index do |r, index|
+  tr
+    td
+      = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
+    td
+      = r.number
+      - if ranks[index+1] && r.number < ranks[index+1].number
+        span.fui-heart<

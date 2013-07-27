@@ -1,21 +1,12 @@
 .span8
+  div
+    = paginate @ranks
   table.table.table-bordered.table-hover.table-striped
     thead
       tr
         th Update Time
         th Rank
     tbody
-      - @rank.each_with_index do |r, index|
-        tr
-          td
-            = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
-          td
-            = r.number
-            - if @rank[index+1] && r.number < @rank[index+1].number
-              span.fui-heart<
+      == slim :_ranks, locals: {ranks: @ranks}
   div
-    = paginate @rank
-
-
-
-
+    = paginate @ranks

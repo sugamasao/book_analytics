@@ -19,7 +19,7 @@ class Application < Sinatra::Base
 
   helpers Kaminari::Helpers::SinatraHelpers
 
-  PAGE_COUNT = 72 * 3
+  PAGE_COUNT = 24 * 3
 
   configure do
     enable :logging
@@ -37,16 +37,16 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    @rank = Rank.order('update_date DESC').page(params[:page]).per(PAGE_COUNT)
+    @ranks = Rank.order('update_date DESC').page(params[:page]).per(PAGE_COUNT)
     redirect '/how_to_start_up' if @book.nil?
     slim :index
   end
 
   get %r{/(\d{4})-?(\d{2})-?(\d{2})} do
     begin
-      @date = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
-      @rank = Rank.permalink(@date)
-      error 404 if @rank.empty?
+      @date  = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
+      @ranks = Rank.permalink(@date)
+      error 404 if @ranks.empty?
 
       @next = Rank.permalink(@date + 1).count > 0
       @prev = Rank.permalink(@date - 1).count > 0

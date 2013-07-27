@@ -14,12 +14,7 @@
         th Update Time
         th Rank
     tbody
-      - @rank.each do |r|
-        tr
-          td
-            = r.local_update_date.strftime('%Y-%m-%d %H:%M:%S')
-          td
-            = r.number
+      == slim :_ranks, locals: {ranks: @ranks}
   div
     - if @next
       span.fui-arrow-left
