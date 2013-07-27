@@ -44,12 +44,14 @@ class Application < Sinatra::Base
 
   get %r{/(\d{4})-?(\d{2})-?(\d{2})} do
     begin
-    @date = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
-    @rank = Rank.permalink(@date)
-    @next = Rank.permalink(@date + 1).count > 0
-    @prev = Rank.permalink(@date - 1).count > 0
+      @date = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
+      @rank = Rank.permalink(@date)
+      error 404 if @rank.empty?
 
-    redirect '/how_to_start_up' if @book.nil?
+      @next = Rank.permalink(@date + 1).count > 0
+      @prev = Rank.permalink(@date - 1).count > 0
+
+      redirect '/how_to_start_up' if @book.nil?
     rescue => e
       logger.error e.message
       logger.error e.backtrace

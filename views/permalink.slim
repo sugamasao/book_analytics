@@ -1,10 +1,12 @@
 .span8
   div
     - if @next
-      a href="/#{(@date + 1).to_s}" 次の日
+      span.fui-arrow-left
+        a href="/#{(@date + 1).to_s}" 次の日
 
     - if @prev
-      a< href="/#{(@date - 1).to_s}" 前の日
+      span.fui-arrow-right
+        a< href="/#{(@date - 1).to_s}" 前の日
 
   table.table.table-bordered.table-hover.table-striped
     thead
