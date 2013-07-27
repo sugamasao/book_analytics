@@ -42,7 +42,7 @@ class Application < Sinatra::Base
     slim :index
   end
 
-  get %r{/(\d{4})(\d{2})(\d{2})} do
+  get %r{/(\d{4})-?(\d{2})-?(\d{2})} do
     begin
     @date = Date.new(params[:captures][0].to_i, params[:captures][1].to_i, params[:captures][2].to_i)
     @rank = Rank.permalink(@date)

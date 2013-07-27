@@ -47,7 +47,7 @@ html
               td
                 = @max_rank.number
                 | (
-                a href="/#{@max_rank.local_update_date.strftime('%Y%m%d')}"  #{@max_rank.local_update_date.strftime('%Y-%m-%d')}
+                a href="/#{@max_rank.local_update_date.strftime('%Y-%m-%d')}"  #{@max_rank.local_update_date.strftime('%Y-%m-%d')}
                 | )
 
       == yield
