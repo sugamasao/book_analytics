@@ -1,4 +1,3 @@
-require 'fileutils'
 require 'pathname'
 require 'active_record'
 
@@ -18,7 +17,7 @@ module DB
 
   def self.local_database_path
     path = Pathname.new(__dir__).parent.join('db', 'database.sqlite3')
-    FileUtils.mkdir_p(path.dirname)
+    path.parent.mkpath
     path.to_s
   end
 

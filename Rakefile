@@ -1,14 +1,12 @@
 require 'pathname'
 require_relative 'lib/db'
 require_relative 'lib/model/cover'
+require_relative 'lib/model/rank'
 
 namespace :db do
-
   desc 'create database'
   task :create_database do
-    path = Pathname.new(__dir__).join('db', 'database.sqlite3')
-    conn = DB.connect_database(path)
-
+    conn = DB.connect_database
     unless conn.table_exists?(:ranks)
       conn.create_table :ranks do |t |
         t.column :number,      :integer, null: false
@@ -50,12 +48,21 @@ namespace :db do
     end
   end
 
-  desc 'create seed'
-  task :seed do
-    path = Pathname.new(__dir__).join('db', 'database.sqlite3')
-    conn = DB.connect_database(path)
+  desc 'create initial data'
+  task :init do
+    conn = DB.connect_database
     %w(large medium tiny thumbnail).each do |name|
       Cover.find_or_create_by!(label: name)
+    end
+  end
+end
+namespace :local do
+  desc 'create local sample data'
+  task 'seed' do
+    DB.connect_database
+    File.readlines(File.join(__dir__, 'db', 'local_seed.txt')).each do |line|
+      data = line.split(',')
+      Rank.create!(number: data[0], update_date: data[1])
     end
   end
 end
