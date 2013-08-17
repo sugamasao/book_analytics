@@ -8,6 +8,7 @@ AmazonのAPIから取得できる、本カテゴリーの中での順位を取�
 ### Set ENV
 
 - [access to amazon associate site](https://affiliate.amazon.co.jp)
+- app.rb の BOOK_ISBN の値は好きな本のISBNに変えてね
 
 #### local
 
