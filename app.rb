@@ -11,8 +11,7 @@ require_relative 'lib/model/book'
 require_relative 'lib/model/cover'
 require_relative 'lib/model/rank'
 
-BOOK_ISBN     = '4774158798'
-#BOOK_ISBN     = '477415539X'
+BOOK_ISBN = '4774158798' # Perfect Ruby's ISBN
 
 class Application < Sinatra::Base
 
