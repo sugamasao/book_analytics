@@ -1,4 +1,6 @@
-# パーフェクトRuby Analytics
+# Book Analytics
+
+AmazonのAPIから取得できる、本カテゴリーの中での順位を取得するよ。
 
 ## How To Run
 
@@ -31,6 +33,10 @@ heroku config:add AMAZON_ASSOCIATE_TAG=your associate name
 heroku run rake db:create_database
 heroku run rake db:seed
 ```
+
+## How To Use
+
+cronなどで /update にアクセスしてください。一時間に一回だけデータを取得しにいきます（例えば13:20にデータを取得したら13:40にアクセスしてもデータの取得は行わないで、14時台にアクセスするとデータを取得します）。
 
 ## Get Third Party Files.
 
