@@ -4,6 +4,7 @@ ruby '2.0.0'
 
 gem 'rake'
 gem 'nokogiri'
+gem 'newrelic_rpm'
 
 gem 'sinatra'
 gem 'kaminari', require: 'kaminari/sinatra'

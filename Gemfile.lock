@@ -41,6 +41,7 @@ GEM
     mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.7.7)
+    newrelic_rpm (3.6.9.171)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     padrino-core (0.11.2)
@@ -101,6 +102,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   kaminari
+  newrelic_rpm
   nokogiri
   padrino-helpers (~> 0.11)
   pg

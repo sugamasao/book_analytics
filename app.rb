@@ -24,6 +24,10 @@ class Application < Sinatra::Base
     DB.connect_database
   end
 
+  configure :production do
+    require 'newrelic_rpm'
+  end
+
   configure :development do
     Bundler.require(:development)
     register Sinatra::Reloader
