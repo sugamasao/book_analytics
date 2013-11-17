@@ -36,6 +36,13 @@ heroku run rake db:create_database
 heroku run rake db:seed
 ```
 
+ add New Relic
+
+```sh
+% heroku config:set NEW_RELIC_APP_NAME="book_analytics"
+% heroku config:add NEW_RELIC_LICENSE_KEY=your new relic key
+```
+
 ## How To Use
 
 cronなどで /update にアクセスしてください。一時間に一回だけデータを取得しにいきます（例えば13:20にデータを取得したら13:40にアクセスしてもデータの取得は行わないで、14時台にアクセスするとデータを取得します）。
